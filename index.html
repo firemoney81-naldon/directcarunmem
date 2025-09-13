@@ -44,395 +44,345 @@
   <meta name="format-detection" content="telephone=no"/>
   
   
+
+  <!-- Schema.org 자동차보험 서비스 -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "자동차보험료 비교 및 계산 서비스",
+      "provider": {
+        "@type": "Organization",
+        "name": "보험비교 전문업체",
+        "url": "https://yourdomain.com"
+      },
+      "areaServed": "대한민국",
+      "description": "신차자동차보험료 기준, 할인 요소, 비교 견적 제공",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "보험료 견적 안내",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "기본 보험료 계산"
+            },
+            "price": "무료",
+            "priceCurrency": "KRW",
+            "description": "차종ㆍ연식ㆍ운전경력 기준 계산"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "종합보험 견적"
+            },
+            "price": "₩20,000 ~ ₩50,000",
+            "priceCurrency": "KRW",
+            "description": "보장 범위에 따른 견적"
+          }
+        ]
+      }
+    }
+  </script>
   
   <style>
-    :root{
-      --bg:#f5fbff;
-      --card:#ffffff;
-      --primary:#1565c0;
-      --accent:#ff7a45;
-      --muted:#6b7a90;
-      --soft:#e8f5ff;
-      --radius:12px;
-      --maxw:1100px;
+    /* 기본 리셋 & 폰트 */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
     }
-    *{box-sizing:border-box}
-    body{
-      font-family:"Noto Sans KR", system-ui, -apple-system, "Helvetica Neue", Arial;
-      margin:0;
-      background:linear-gradient(180deg,var(--bg),#ffffff 40%);
-      color:#213040;
-      line-height:1.75;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
+    body {
+      font-family: "Noto Sans KR", sans-serif;
+      background: linear-gradient(to bottom, #f0f8ff, #ffffff);
+      color: #333;
+      line-height: 1.6;
     }
-    header{
-      background:linear-gradient(90deg,var(--primary),#2a9df4 60%);
-      color:white;
-      padding:36px 18px;
-      text-align:center;
-      box-shadow:0 6px 18px rgba(21,101,192,0.18);
+    a {
+      text-decoration: none;
+      color: #0073e6;
     }
-    .container{max-width:var(--maxw);margin:28px auto;padding:0 18px;}
-    h1{
-      font-size:2.2rem;
-      margin:0 0 8px;
-      letter-spacing:-0.01em;
-      font-weight:900;
-      text-shadow:0 1px 0 rgba(0,0,0,0.03);
+    a:hover {
+      color: #005bb5;
     }
-    .subtitle{font-size:1rem;color:rgba(255,255,255,0.95);opacity:.95;margin:0}
-    nav.topnav{display:flex;justify-content:center;gap:14px;margin-top:16px}
-    nav a.toplink{color:white;text-decoration:none;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,0.06);font-weight:700}
-    nav a.toplink:hover{background:rgba(255,255,255,0.12)}
-
-    main{background:var(--card);border-radius:var(--radius);margin-top:-40px;padding:28px;box-shadow:0 18px 40px rgba(30,70,100,0.06)}
-    .hero{
-      display:flex;gap:20px;align-items:flex-start;
-      flex-wrap:wrap;padding:18px;border-radius:10px;background:linear-gradient(180deg,#f9fdff,#ffffff 60%);
+    header {
+      background-color: #0073e6;
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
     }
-    .hero .left{flex:1 1 520px;min-width:280px}
-    .hero h2{color:var(--primary);margin:0 0 6px;font-size:1.45rem}
-    .hero p{margin:0 0 14px;color:var(--muted)}
-    .cta{
-      display:flex;gap:12px;flex-wrap:wrap;
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
     }
-    .btn{
-      display:inline-block;padding:10px 18px;border-radius:999px;text-decoration:none;font-weight:800;
-      color:white;background:var(--accent);box-shadow:0 6px 18px rgba(255,122,69,0.18);
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1rem;
     }
-    .btn.secondary{background:var(--primary);}
-    .card{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 6px 18px rgba(20,40,60,0.04);margin-bottom:18px}
-
-    .tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
-    .tag{background:var(--soft);color:var(--primary);padding:6px 10px;border-radius:999px;font-weight:700;text-decoration:none}
-
-    .grid{display:grid;grid-template-columns:1fr 340px;gap:18px;margin-top:18px}
-    @media (max-width:980px){.grid{grid-template-columns:1fr}}
-
-    article h3{color:var(--primary);margin-top:8px}
-    table.prices{width:100%;border-collapse:collapse;margin-top:12px}
-    table.prices th, table.prices td{padding:10px;border:1px solid #eef3f8;text-align:center}
-    table.prices th{background:linear-gradient(180deg,var(--primary),#2a9df4);color:white}
-
-    .keyword-cloud{display:flex;flex-wrap:wrap;gap:8px;padding-top:8px}
-    .kw{background:#f0f8ff;padding:6px 10px;border-radius:8px;color:var(--primary);font-weight:700;font-size:.95rem;text-decoration:none}
-
-    footer{padding:18px;text-align:center;color:#7b8796;font-size:.95rem;margin-top:28px}
-
-    /* FAQ */
-    dl dt{cursor:pointer;padding:12px;border-radius:8px;background:#f7fbff;margin-bottom:8px;font-weight:800}
-    dl dd{padding:12px 18px;margin:0 0 12px;background:#ffffff;border-left:4px solid #e6f3ff;display:none}
-    dl dt[aria-expanded="true"]{background:#eaf6ff}
-    dl dt[aria-expanded="true"] + dd{display:block}
-
-    /* small helper */
-    .muted{color:var(--muted);font-size:.95rem}
-    .external{font-weight:700;color:var(--primary);text-decoration:underline}
-    .badge{display:inline-block;padding:4px 8px;border-radius:8px;background:#def0ff;color:var(--primary);font-weight:800}
+    nav a {
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    nav a:hover {
+      background-color: #005bb5;
+      color: #ffffff;
+    }
+    main {
+      max-width: 960px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background-color: white;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      border-radius: 10px;
+    }
+    h2 {
+      color: #004080;
+      font-size: 1.8rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      border-bottom: 3px solid #0073e6;
+      padding-bottom: 0.5rem;
+    }
+    section p, section ul, section ol {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+    ul li, ol li {
+      margin-bottom: 0.5rem;
+    }
+    .keyword-tags {
+      margin: 1.5rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .keyword-tags a {
+      background-color: #e6f2ff;
+      color: #005bb5;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      transition: background-color 0.3s ease;
+    }
+    .keyword-tags a:hover {
+      background-color: #cce4ff;
+    }
+    .cta-button {
+      display: inline-block;
+      background-color: #ff6600;
+      color: white;
+      font-weight: 700;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      margin: 1.5rem 0;
+      transition: background-color 0.3s ease;
+    }
+    .cta-button:hover {
+      background-color: #e65c00;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 2rem;
+    }
+    th, td {
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background-color: #0073e6;
+      color: white;
+    }
+    /* FAQ 스타일 */
+    dl dt {
+      font-weight: 700;
+      margin-top: 1rem;
+      padding: 0.75rem;
+      background-color: #eef7ff;
+      border-radius: 5px;
+      cursor: pointer;
+      color: #005bb5;
+    }
+    dl dd {
+      margin-left: 1rem;
+      margin-bottom: 1rem;
+      display: none;
+      padding: 0.5rem 1rem;
+      background-color: #f9fbfe;
+      border-left: 4px solid #0073e6;
+      border-radius: 0 5px 5px 0;
+    }
+    dl dt.active + dd {
+      display: block;
+    }
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.9rem;
+      color: #666;
+      background-color: #f0f0f0;
+      margin-top: 2rem;
+    }
   </style>
-
-  <!-- Structured data: Organization + FAQ (간단) -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Organization",
-    "name":"신차보험정보센터",
-    "url":"https://yourdomain.com",
-    "sameAs":[
-      "https://namu.wiki",
-      "https://www.fss.or.kr",
-      "https://www.fsc.go.kr",
-      "https://www.koroad.or.kr",
-      "https://www.kidi.or.kr",
-      "https://www.knia.or.kr"
-    ]
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"신차 자동차보험료는 어떻게 산정되나요?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"보험료는 차량가액(차종), 가입자 연령/운전경력, 주행거리, 가입 담보(자차·대인·대물 등), 보험회사의 요율 및 할인(무사고·안전장치 할인)·할증(사고 이력) 요인으로 결정됩니다."
-        }
-      },
-      {
-        "@type":"Question",
-        "name":"신차인데 보험료 할인이 가능한가요?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"무사고 경력이나 안전장치(에어백, ABS 등) 장착, 주행거리 낮음 등의 조건으로 할인 적용이 가능하며, 신차 대물특약·긴급출동 옵션 선택에 따라 달라집니다."
-        }
-      },
-      {
-        "@type":"Question",
-        "name":"보험료 비교는 어떻게 시작해야 하나요?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"차량정보(모델/연식/배기량), 주 운전자 정보(연령, 운전경력), 예상주행거리, 필요한 보장 항목을 준비해 보험사 비교견적과 공정 비교사이트(금융감독원·손해보험협회 등)를 함께 확인하는 것이 권장됩니다."
-        }
-      }
-    ]
-  }
-  </script>
 
 </head>
 <body>
   <header>
-    <div class="container">
-      <h1>신차자동차보험료 — 신차 보험료 계산·비교 · 절약 가이드</h1>
-      <p class="subtitle">신차 구매 후 꼭 확인할 신차보험료의 모든 것 — 요인, 예시 계산, 할인 팁, 신뢰할 수 있는 자료 링크 모음</p>
-      <nav class="topnav" aria-label="주요메뉴">
-        <a class="toplink" href="#overview">핵심요약</a>
-        <a class="toplink" href="#factors">요인분석</a>
-        <a class="toplink" href="#calculator">예시계산</a>
-        <a class="toplink" href="#faq">FAQ</a>
-        <a class="toplink" href="#resources">공식자료</a>
-      </nav>
-    </div>
+    <h1>신차자동차보험료 안내</h1>
+    <p>내 차에 딱 맞는 보험료, 비교하고 절약하세요 🔍</p>
+    <nav>
+      <ul>
+        <li><a href="#보험료계산">보험료 계산하기</a></li>
+        <li><a href="#절약팁">절약 팁</a></li>
+        <li><a href="#자주묻는질문">FAQ</a></li>
+        <li><a href="#관련자료">관련 자료</a></li>
+        <li><a href="#문의">문의 및 견적</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <main class="container" role="main">
-    <section class="hero card" aria-labelledby="hero-title">
-      <div class="left">
-        <h2 id="hero-title">신차자동차보험료, 무엇이 다른가요?</h2>
-        <p>신차는 중고차보다 차량가액이 높아 '자차(자기차량손해)' 보험료 영향이 큽니다. 초기 가입 시 보장 선택에 따라 보험료가 크게 달라질 수 있으니—필요한 보장과 비용을 균형 있게 설계해야 합니다.</p>
+  <main>
+    <section id="보험료계산">
+      <h2>신차 자동차보험료 계산하기</h2>
+      <p>자동차보험료는 여러 요소에 의해 결정됩니다:</p>
+      <ul>
+        <li>차량 가격 (신차 기준)</li>
+        <li>차종 및 차량 배기량</li>
+        <li>운전자의 연령 및 경력</li>
+        <li>보험 보장 범위 (기본/종합/특약)</li>
+        <li>할인 요소 (무사고, 안전장치, 블랙박스 등)</li>
+      </ul>
+      <table>
+        <thead>
+          <tr>
+            <th>구분</th>
+            <th>신차자동차보험료 약정 예시</th>
+            <th>비고</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>소형 승용신차 (1.5L 이하)</td>
+            <td>₩800,000 ~ ₩1,200,000 / 년</td>
+            <td>운전 3년·무사고 기준</td>
+          </tr>
+          <tr>
+            <td>중형 승용신차 (2.0L 이하)</td>
+            <td>₩1,200,000 ~ ₩1,800,000 / 년</td>
+            <td>보험종류 종합보험 포함</td>
+          </tr>
+          <tr>
+            <td>고급 / 수입 신차</td>
+            <td>₩2,000,000 ~ ₩3,500,000 / 년</td>
+            <td>수입차세, 교체부품 비용 반영</td>
+          </tr>
+        </tbody>
+      </table>
 
-        <div class="tags" aria-hidden="false">
-          <span class="tag">신차 보험료 계산</span>
-          <span class="tag">자동차보험 비교</span>
-          <span class="tag">무사고 할인</span>
-          <span class="tag">자차·대인·대물</span>
-        </div>
+      <a href="#문의" class="cta-button" aria-label="신차자동차보험료 견적 문의하기">무료 견적 받기</a>
+    </section>
 
-        <div style="margin-top:14px" class="cta">
-          <a class="btn" href="#calculator">예상 보험료 예시 보기</a>
-          <a class="btn secondary" href="#resources">공식자료·비교사이트</a>
-        </div>
-      </div>
+    <section id="절약팁">
+      <h2>신차자동차보험료 절약 팁</h2>
+      <ol>
+        <li>무사고 할인율이 높은 보험사를 선택하세요.</li>
+        <li>안전장치(에어백, ABS, 자동비상제동장치 등)가 있는 차량은 할인이 가능합니다.</li>
+        <li>운전 경력이 길수록 보험료가 낮아질 수 있습니다.</li>
+        <li>여러 보험사의 견적을 비교하여 보장 내용 대비 가격을 확인하세요.</li>
+        <li>필요 없는 특약은 제거하거나 기본형으로 조정하세요.</li>
+      </ol>
+    </section>
 
-      <div style="flex:0 1 320px">
-        <div class="card" aria-hidden="false">
-          <strong class="muted">빠른 체크리스트</strong>
-          <ul style="margin:10px 0 0;padding-left:18px;">
-            <li>차종(모델/트림) : 엔진/차체가액 반영</li>
-            <li>주 운전자 연령/운전경력</li>
-            <li>운행 용도(출퇴근/영업 등)</li>
-            <li>원하는 보장: 자차 포함 여부</li>
-            <li>무사고 경력/안전장치 할인 가능성</li>
-          </ul>
-        </div>
+    <section id="자주묻는질문">
+      <h2>자주 묻는 질문</h2>
+      <dl>
+        <dt tabindex="0" aria-expanded="false">신차자동차보험료는 언제부터 적용되나요?</dt>
+        <dd>신차 등록일 기준으로 보험이 시작되며, 보험 가입 시점의 차량 가격 및 옵션이 반영됩니다.</dd>
+        <dt tabindex="0" aria-expanded="false">보험료는 어떻게 산출되나요?</dt>
+        <dd>차량 가치, 배기량, 안전장치 유무, 운전자의 나이/성별/경력, 사고 이력 등이 복합적으로 반영됩니다.</dd>
+        <dt tabindex="0" aria-expanded="false">신차 특별 할인이 있나요?</dt>
+        <dd>네, 일부 보험사는 신차 보유 고객에게 초기 할인 또는 특약 우대 혜택을 제공합니다. 보험사별로 상이하므로 비교 견적이 중요합니다.</dd>
+        <dt tabindex="0" aria-expanded="false">보험 갱신 시 보험료가 어떻게 변하나요?</dt>
+        <dd>운전 경력, 사고 유무, 보험료 인상률, 차량 감가상각 등이 영향을 미칩니다.</dd>
+      </dl>
+    </section>
 
-        <div style="margin-top:12px" class="card">
-          <strong>추천 액션</strong>
-          <p class="muted" style="margin:8px 0 0">견적 전, 차량 정보와 운전자 정보를 정확히 준비해 2~4개 보험사 비교견적을 받아보세요. 금융감독원·손해보험협회 공시자료 확인을 병행하면 신뢰도가 올라갑니다.</p>
-        </div>
+    <section id="관련자료">
+      <h2>신뢰할 수 있는 자료 및 외부 링크</h2>
+      <ul>
+        <li><a href="https://www.kidi.or.kr/main.do" target="_blank" rel="noopener noreferrer">한국소비자원 자동차보험 비교 정보 – 소비자 안전 정보</a></li>
+        <li><a href="https://www.fss.or.kr/fss/kr/policy/press_view.jsp?bbsid=258&amp;no=3429" target="_blank" rel="noopener noreferrer">금융감독원 보험료 산정 기준 안내</a></li>
+        <li><a href="https://www.law.go.kr/법률/자동차보험법" target="_blank" rel="noopener noreferrer">자동차보험법 – 대한민국 법제처</a></li>
+        <li><a href="https://ko.wikipedia.org/wiki/자동차보험" target="_blank" rel="noopener noreferrer">나무위키: 자동차보험 (개요 및 역사)</a></li>
+        <li><a href="https://www.youtube.com/watch?v=example" target="_blank" rel="noopener noreferrer">신차자동차보험료 계산 방법 영상강의</a></li>
+      </ul>
+
+      <div class="keyword-tags" aria-label="연관 키워드">
+        <a href="#">자동차보험 비교</a>
+        <a href="#">신차 보험료 산정 기준</a>
+        <a href="#">무사고 할인 자동차보험</a>
+        <a href="#">자동차보험 특약 종류</a>
+        <a href="#">신차 보험료 절약방법</a>
       </div>
     </section>
 
-    <div class="grid">
-      <article>
-        <section id="overview" class="card" aria-labelledby="overview-title">
-          <h3 id="overview-title">핵심 요약 — 신차자동차보험료 한눈에 보기</h3>
-          <p>신차보험료는 기본적으로 <strong>차량가액</strong>과 <strong>운전자 리스크(연령·운전경력·사고이력)</strong>, <strong>선택 담보(자차, 특약 등)</strong>, <strong>보험사 요율</strong>이 합쳐져 결정됩니다. 신차는 차량가액이 높아 자차 담보 선택 시 보험료 상승 폭이 큽니다.</p>
+    <section id="함께많이찾는">
+      <h2>함께 많이 찾는 키워드 카테고리</h2>
+      <div class="keyword-tags">
+        <a href="#">자동차보험료 계산기</a>
+        <a href="#">신차 보험료 vs 중고차 보험료</a>
+        <a href="#">보험료 세금 포함 여부</a>
+        <a href="#">할부 / 리스 신차 보험료</a>
+        <a href="#">긴급출동 특약 보험료</a>
+      </div>
+    </section>
 
-          <h4 style="margin-top:10px">보험료에 큰 영향을 주는 6가지</h4>
-          <ol>
-            <li><strong>차량가액(차종/트림)</strong> — 신차일수록 자차 보장비율 반영</li>
-            <li><strong>연령·운전경력</strong> — 젊을수록, 경력이 짧을수록 할증</li>
-            <li><strong>무사고 할인/할증 이력</strong> — 블랙박스·안전장치 할인 가능</li>
-            <li><strong>주행거리·용도</strong> — 영업용/출퇴근용에 따른 차등</li>
-            <li><strong>특약 선택</strong> — 긴급출동, 렌트비 보장 등 추가비용</li>
-            <li><strong>지역(주차환경)·차량 보관 상황</strong> — 사고·도난 위험 반영</li>
-          </ol>
+    <section id="문의">
+      <h2>견적 및 문의</h2>
+      <p>신차자동차보험료에 대해 궁금하신 점이나 정확한 견적을 원하시면 아래 연락처 또는 양식을 이용해 주세요.</p>
+      <ul>
+        <li>전화: 010‑9876‑5432</li>
+        <li>이메일: insurance@yourdomain.com</li>
+      </ul>
+      <a href="mailto:insurance@yourdomain.com" class="cta-button" aria-label="보험료 견적 문의하기">견적 문의하기</a>
+    </section>
 
-          <h3 style="margin-top:12px">가격표(간단 비교)</h3>
-          <table class="prices" aria-describedby="price-note">
-            <thead>
-              <tr><th>차종(예)</th><th>예상 기본 보험료(월)</th><th>설명</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>경차·소형</td><td>40,000 ~ 80,000</td><td>차량가액 낮음 · 자차 선택에 따라 증감</td></tr>
-              <tr><td>준중형·중형</td><td>70,000 ~ 140,000</td><td>신차 트림·옵션 반영</td></tr>
-              <tr><td>SUV·대형</td><td>120,000 ~ 250,000</td><td>차량가액 높아 자차 부담 증가</td></tr>
-            </tbody>
-          </table>
-          <p id="price-note" class="muted">※ 위 금액은 예시(표준요율 기준)입니다. 실제 보험료는 개인별 조건·보험사 요율에 따라 달라집니다.</p>
-
-          <h3 style="margin-top:12px">신차 가입 시 유의사항</h3>
-          <ul>
-            <li>신차가치(신차가격)를 정확히 입력해야 자차보상 시 과소보상 위험을 줄일 수 있습니다.</li>
-            <li>신차의 경우 '신차특약' 또는 '신차가치보장 특약'이 있는지 확인하면 신차 초기 가치 보장에 유리할 수 있습니다.</li>
-            <li>초기 1~2년간은 차량가액이 빠르게 변하므로 보험 갱신 시점에 다시 확인하세요.</li>
-          </ul>
-        </section>
-
-        <section id="factors" class="card" aria-labelledby="factors-title">
-          <h3 id="factors-title">보험료 산정요인 상세 분석</h3>
-
-          <h4>1) 차량 관련 요인</h4>
-          <p>차량의 연식·모델·배기량·차체가격은 자차 보험료 산정에 직접적 영향을 줍니다. 고가의 옵션·사양이 많을수록 수리비가 높아 보험료가 상승할 가능성이 큽니다.</p>
-
-          <h4>2) 운전자 관련 요인</h4>
-          <p>주 운전자의 나이, 초보·경력, 면허상태, 이전 사고 이력 등은 보험사 리스크 평가에서 중요한 요소입니다. 20대 초반·초보 운전자는 할증이 큽니다.</p>
-
-          <h4>3) 보험·담보 구성</h4>
-          <p>기본 책임보험(대인·대물) 외에 자차 포함 여부, 자기신체사고, 무보험차상해, 렌트비 보장 등 특약 추가 여부에 따라 전체 보험료가 바뀝니다.</p>
-
-          <h4>4) 할인·할증 요인</h4>
-          <p>무사고 경력, 블랙박스 장착, 주행거리 낮음(저연비) 등은 할인요건으로 작용합니다. 반대로 최근 사고 이력은 할증 요인이 됩니다.</p>
-
-        </section>
-
-        <section id="calculator" class="card" aria-labelledby="calc-title">
-          <h3 id="calc-title">실전 예시 — 간단한 보험료 계산(모의)</h3>
-          <p class="muted">아래 예시는 이해를 돕기 위한 간단한 모의 계산입니다. 실제 보험사는 자체 요율표를 사용합니다.</p>
-
-          <h4>예시 가정</h4>
-          <ul>
-            <li>차량: 중형 세단 (신차가액 30,000,000원)</li>
-            <li>주 운전자: 35세, 무사고 5년</li>
-            <li>주행용도: 자가용(출퇴근)</li>
-            <li>선택 담보: 자차 포함, 대인·대물 보장 표준</li>
-          </ul>
-
-          <h4>간단 공식(예시)</h4>
-          <p><strong>예상보험료 = (기본요율 × 차량가액 × 보장계수) × (1 - 할인율) + 부대비용</strong></p>
-          <p>예) 기본요율 0.004 (월기준 단순표시), 차량가액 30,000,000원, 보장계수 1.0, 할인율 0.15(무사고) →</p>
-          <p><strong>예상보험료 = (0.004 × 30,000,000 × 1.0) × (1 - 0.15) = 120,000 × 0.85 = 102,000원(월)</strong></p>
-          <p class="muted">※ 실제 보험사는 연간·월간·요율체계가 상이하므로 위 값은 이해용(단순화) 예시입니다.</p>
-
-          <h4 style="margin-top:10px">비교 팁</h4>
-          <ol>
-            <li>동일한 보장(자차 포함 여부, 면책금, 특약) 기준으로 3개 이상 견적 비교</li>
-            <li>온라인 비교견적과 보험사 직접 견적을 함께 비교(할인·이벤트 반영 차이)</li>
-            <li>갱신 시점에 무사고 할증·할인 반영 내역을 꼼꼼히 확인</li>
-          </ol>
-        </section>
-
-        <section id="tips" class="card" aria-labelledby="tips-title">
-          <h3 id="tips-title">보험료 절약 팁 — 신차 기준</h3>
-          <ul>
-            <li><strong>불필요한 담보는 제거</strong> — 신차라 해도 필요 없는 특약은 제외하세요.</li>
-            <li><strong>무사고 경력·안전장치 증명</strong> — 블랙박스·차량 보안장치 사진/영수증으로 할인 혜택 챙기기.</li>
-            <li><strong>운전자 범위 조정</strong> — 가족 중 주 운전자만 지정하면 비용을 절감할 수 있음(단 보험사 규정 준수).</li>
-            <li><strong>대인·대물 보장 최소 기준 확인</strong> — 법정 최소 보장을 확인하고 과다 가입하지 않기.</li>
-            <li><strong>장기계약·자동이체 할인 확인</strong> — 일부 보험사는 자동이체·카드 결제 할인 제공.</li>
-          </ul>
-        </section>
-
-        <section id="faq" class="card" aria-labelledby="faq-title">
-          <h3 id="faq-title">자주 묻는 질문 (FAQ)</h3>
-          <dl>
-            <dt tabindex="0" aria-expanded="false">신차인데 자차 보험은 필수인가요?</dt>
-            <dd>법적 의무는 아니지만, 신차의 경우 수리비·교체비가 높아 자차 가입을 권장합니다. 차량가액 대비 자차보험료를 비교해 결정하세요.</dd>
-
-            <dt tabindex="0" aria-expanded="false">보험 갱신 시 보험료가 갑자기 오를 수 있나요?</dt>
-            <dd>네. 사고 이력, 보험사 요율 변경, 차량가액 변동 등으로 갱신시 보험료가 변동될 수 있습니다. 갱신 통지 시 상세 내역을 요청하세요.</dd>
-
-            <dt tabindex="0" aria-expanded="false">신차특약은 어떤 게 있나요?</dt>
-            <dd>신차가치 보장 특약, 무상수리 기간 보장, 렌트비 보장 등 보험사별로 차이가 있으니 계약 전 특약 내용을 확인하세요.</dd>
-          </dl>
-        </section>
-
-      </article>
-
-      <aside>
-        <div class="card" id="resources" aria-labelledby="resources-title">
-          <h3 id="resources-title">공식 자료 및 권위 있는 참조(권장)</h3>
-          <p class="muted">아래 기관은 보험·교통·법률 관련 공식·참고용 자료를 제공하는 곳들입니다. (※ URL은 서비스 변경 가능 — 배포 전 확인 권장)</p>
-
-          <ul style="margin-top:8px">
-            <li><a class="external" href="https://namu.wiki" target="_blank" rel="noopener">나무위키 — 신차/자동차보험 관련 일반 정보</a></li>
-            <li><a class="external" href="https://www.fss.or.kr" target="_blank" rel="noopener">금융감독원 (FSS) — 보험 관련 소비자 안내·공시</a></li>
-            <li><a class="external" href="https://www.fsc.go.kr" target="_blank" rel="noopener">금융위원회 (FSC) — 금융정책·감독 정책 자료</a></li>
-            <li><a class="external" href="https://www.koroad.or.kr" target="_blank" rel="noopener">도로교통공단 (Koroad) — 운전자 통계·운전경력 관련 자료</a></li>
-            <li><a class="external" href="https://www.kidi.or.kr" target="_blank" rel="noopener">보험개발원 (KIDI) — 보험 통계·리포트</a></li>
-            <li><a class="external" href="https://www.knia.or.kr" target="_blank" rel="noopener">손해보험협회 — 손해보험 관련 공시·자료</a></li>
-            <li><a class="external" href="https://www.law.go.kr" target="_blank" rel="noopener">국가법령정보센터 — 보험관련 법령·규정</a></li>
-          </ul>
-
-          <p class="muted" style="margin-top:10px">※ 위 링크는 참조용입니다. (제가 현재 실시간으로 URL을 확인할 수 없어, 실제 링크가 변경되었을 수 있습니다.)</p>
-        </div>
-
-        <div class="card">
-          <h4>자동완성 키워드 (예상)</h4>
-          <div class="keyword-cloud" aria-hidden="false">
-            <a class="kw" href="#">신차자동차보험료 계산기</a>
-            <a class="kw" href="#">신차 자동차 보험료 비교</a>
-            <a class="kw" href="#">신차 보험료 할인</a>
-            <a class="kw" href="#">신차 보험료 2025</a>
-            <a class="kw" href="#">신차 자차 보험료</a>
-            <a class="kw" href="#">신차 자동차보험료 계산</a>
-            <a class="kw" href="#">신차 보험 추천</a>
-            <a class="kw" href="#">신차 보험 견적</a>
-            <a class="kw" href="#">신차 보험료 절약</a>
-            <a class="kw" href="#">신차 특약 신차가치 보장</a>
-          </div>
-        </div>
-
-        <div class="card">
-          <h4>연관 키워드</h4>
-          <ul style="padding-left:18px;margin:8px 0 0">
-            <li>자동차보험료 계산법</li>
-            <li>자차 vs 책임보험 차이</li>
-            <li>무사고 할인 기준</li>
-            <li>운전자 한정 특약</li>
-            <li>블랙박스 할인</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h4>'함께 많이 찾는' 카테고리</h4>
-          <div style="display:flex;flex-direction:column;gap:8px;margin-top:6px">
-            <a class="kw" href="#">신차 구매비용</a>
-            <a class="kw" href="#">신차 할부 계산</a>
-            <a class="kw" href="#">자동차세 안내</a>
-            <a class="kw" href="#">내차팔기 시 보험처리</a>
-            <a class="kw" href="#">중고차 vs 신차 보험비교</a>
-          </div>
-        </div>
-
-        <div class="card">
-          <h4>문의 / 상담</h4>
-          <p class="muted">정확한 견적을 원하시면 아래로 문의해주세요.</p>
-          <ul style="margin:8px 0 0;padding-left:18px">
-            <li>전화: 010-1234-5678</li>
-            <li>이메일: <a href="mailto:contact@yourdomain.com">contact@yourdomain.com</a></li>
-          </ul>
-        </div>
-      </aside>
-    </div>
-
-   
-
-    <footer>
-      <p>&copy; 2025 신차자동차보험료 정보센터 — 제공되는 정보는 일반 안내용이며, 실제 보험료는 보험사 견적으로 확인하세요.</p>
-    </footer>
   </main>
 
+  <footer>
+    <p>&copy; 2025 보험비교 전문업체. 모든 권리 보유.</p>
+  </footer>
+
   <script>
-    // FAQ 아코디언(접기/펼치기)
-    document.querySelectorAll('dl dt').forEach(dt => {
+    // FAQ 아코디언 기능
+    document.querySelectorAll('dl dt').forEach((dt) => {
       dt.addEventListener('click', () => {
-        const expanded = dt.getAttribute('aria-expanded') === 'true';
-        dt.setAttribute('aria-expanded', !expanded);
-        dt.classList.toggle('active', !expanded);
+        dt.classList.toggle('active');
+        let expanded = dt.getAttribute('aria-expanded') === 'true';
+        dt.setAttribute('aria-expanded', String(!expanded));
       });
-      dt.addEventListener('keydown', (e) => { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); dt.click(); }});
+      dt.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          dt.click();
+        }
+      });
     });
   </script>
+
 </body>
-</html>
+
+
+
+<script type="text/javascript">!function(t,n){n=n||"ntm";window["ntm_"+t]=n,window[n]=window[n]||[],window[n].push({"ntm.start":+new Date});t=document.getElementsByTagName("script")[0],n=document.createElement("script");n.async=!0,n.src="https://ntm.pstatic.net/scripts/ntm_092eb2d60ae1.js",t.parentNode.insertBefore(n,t)}("092eb2d60ae1","ntm");</script><link rel="preload" href="https://financial.pstatic.net/insurance/_next/static/css/4196285b1d4a2a8e.css" as="style" crossorigin="anonymous"/><link rel="stylesheet" href="https://financial.pstatic.net/insurance/_next/static/css/4196285b1d4a2a8e.css" crossorigin="anonymous" data-n-g=""/><link rel="preload" href="https://financial.pstatic.net/insurance/_next/static/css/5de10506caefbb1b.css" as="style" crossorigin="anonymous"/><link rel="stylesheet" href="https://financial.pstatic.net/insurance/_next/static/css/5de10506caefbb1b.css" crossorigin="anonymous" data-n-p=""/><noscript data-n-css=""></noscript><script defer="" crossorigin="anonymous" nomodule="" src="https://financial.pstatic.net/insurance/_next/static/chunks/polyfills-78c92fac7aa8fdd8.js"></script><script src="https://financial.pstatic.net/insurance/_next/static/chunks/webpack-2d209b091ef4f75f.js" defer="" crossorigin="anonymous"></script><script src="https://financial.pstatic.net/insurance/_next/static/chunks/framework-28687832959fe93c.js" defer="" crossorigin="anonymous"></script><script src="https://financial.pstatic.net/insurance/_next/static/chunks/main-3350b21f0ea7f884.js" defer="" crossorigin="anonymous"></script><script src="https://financial.pstatic.net/insurance/_next/static/chunks/pages/_app-9de4f6e76f3337eb.js" defer="" crossorigin="anonymous"></script><script src="https://financial.pstatic.net/insurance/_next/static/chunks/a36818a7-19b84715b1418d0b.js" defer="" crossorigin="anonymous"></script><script src="https://financial.pstatic.net/insurance/_next/static/chunks/6880-8aadbf7488e72db1.js" defer="" crossorigin="anonymous"></script><script src="https://financial.pstatic.net/insurance/_next/static/chunks/7782-5c73eade4fb1210a.js" defer="" crossorigin="anonymous"></script><script src="https://financial.pstatic.net/insurance/_next/static/chunks/4639-af383241aa3aa94f.js" defer="" crossorigin="anonymous"></script><script src="https://financial.pstatic.net/insurance/_next/static/chunks/5249-9ca7138dc6dffac1.js" defer="" crossorigin="anonymous"></script><script src="https://financial.pstatic.net/insurance/_next/static/chunks/2976-1f9a2cec2da6f1f2.js" defer="" crossorigin="anonymous"></script><script src="https://financial.pstatic.net/insurance/_next/static/chunks/8955-6adb7ceb3865aaaa.js" defer="" crossorigin="anonymous"></script><script src="https://financial.pstatic.net/insurance/_next/static/chunks/7517-444f259c859b4736.js" defer="" crossorigin="anonymous"></script><script src="https://financial.pstatic.net/insurance/_next/static/chunks/6020-c27b5903bef02d35.js" defer="" crossorigin="anonymous"></script><script src="https://financial.pstatic.net/insurance/_next/static/chunks/3934-d1cd2a32d5fc1b45.js" defer="" crossorigin="anonymous"></script><script src="https://financial.pstatic.net/insurance/_next/static/chunks/4674-278e4f45dfb8ac16.js" defer="" crossorigin="anonymous"></script><script src="https://financial.pstatic.net/insurance/_next/static/chunks/pages/car-cb3e63270f2a88c9.js" defer="" crossorigin="anonymous"></script><script src="https://financial.pstatic.net/insurance/_next/static/qee9MRHtCSk3RlcWDwLgK/_buildManifest.js" defer="" crossorigin="anonymous"></script><script src="https://financial.pstatic.net/insurance/_next/static/qee9MRHtCSk3RlcWDwLgK/_ssgManifest.js" defer="" crossorigin="anonymous"></script><style data-styled="" data-styled-version="5.3.10"></style></head><span class="blind">신차자동차보험료</span></a></h2></div></header></div><div class=""></div></div></div></div><div class="FlexibleLayout-module_wrapper__9uXan"><div id="content" class="FlexibleLayout-module_inner__hGuDc FlexibleLayout-module_type-full-height__423Op CarInsuranceIntroWrapper_article__cN0e7"><h2 class="blind"></h2><div class="InfoSectionWithoutTicket_article__8ky_3"><div class="InfoSectionWithoutTicket_box__rW3ma"><h3 class="InfoSectionWithoutTicket_title__9eN8G">신차자동차보험료 더 아낄 수 있어요</h3><p class="InfoSectionWithoutTicket_sub-title__2NCx1"></p><div class="InfoSectionWithoutTicket_content__RhPK6"><div class="InfoSectionWithoutTicket_lottie-logo__hoXvX"><div class="InfoSectionWithoutTicket_inner__rPb_X"><img src="https://financial.pstatic.net/insurance/_next/static/media/car_logo_rolling.c8993bcc.png" class="InfoSectionWithoutTicket_loading-logo__78OFS" alt=""/></div></div><div class="InfoSectionWithoutTicket_lottie-number__lLFWR"><img src="https://financial.pstatic.net/insurance/_next/static/media/car_num_rolling.5f57f72f.png" class="InfoSectionWithoutTicket_loading-number__xAlrf" alt=""/></div><div class="InfoSectionBenefit_area-button__pAl7O"><button type="button" class="ButtonBox-module_article__b5G1- ButtonBox-module_medium__fgPwa ButtonBox-module_primary__1jjt- ButtonBox-module_fill__OrKk- ButtonBox-module_color-npayGreen__A2ds2 ButtonBox-module_type-wide__l6sGc" style="width:undefinedpx">1분만에 최저가 신차자동차보험료 찾기</button></div></div></div></div><div class="ContentWrapper_article__cSQqk CardBenefit_article__25iJX"><h3 class="ContentWrapper_title__UAxYu">신차자동차보험료 혜택<!-- --> </h3><div class="CardBenefit_area-tab__gLbMY"><div class="CardBenefit_inner-tab__mXcKX"><ul class="CardBenefit_list-tab__Vz91S is-deskxtop"><li class="CardBenefit_item__6u2BI"><input id="tab-D1AAFO0000" type="checkbox" name="card-tab" class="hidden CardBenefit_input__Af9J8" checked=""/><label for="tab-D1AAFO0000" class="CardBenefit_label__P_vq7"><img src="https://financial.pstatic.net/pie/common-bi/1.20.0/images/CD_HYUNDAI_TextPositive.png" alt="CD_HYUNDAI_TextPositive" width="64" height="18" loading="eager"/></label></li><li class="CardBenefit_item__6u2BI"><input id="tab-D1AAEX0000" type="checkbox" name="card-tab" class="hidden CardBenefit_input__Af9J8"/><label for="tab-D1AAEX0000" class="CardBenefit_label__P_vq7"><img src="https://financial.pstatic.net/pie/common-bi/1.20.0/images/CD_SHINHAN_TextPositive.png" alt="CD_SHINHAN_TextPositive" width="54" height="18" loading="eager"/></label></li><li class="CardBenefit_item__6u2BI"><input id="tab-D1AAAF0000" type="checkbox" name="card-tab" class="hidden CardBenefit_input__Af9J8"/><label for="tab-D1AAAF0000" class="CardBenefit_label__P_vq7"><img src="https://financial.pstatic.net/pie/common-bi/1.20.0/images/CD_KB_TextPositive.png" alt="CD_KB_TextPositive" width="72" height="18" loading="eager"/></label></li><li class="CardBenefit_item__6u2BI"><input id="tab-D1AABG0000" type="checkbox" name="card-tab" class="hidden CardBenefit_input__Af9J8"/><label for="tab-D1AABG0000" class="CardBenefit_label__P_vq7"><img src="https://financial.pstatic.net/pie/common-bi/1.20.0/images/CD_NH_TextPositive.png" alt="CD_NH_TextPositive" width="69" height="18" loading="eager"/></label></li><li class="CardBenefit_item__6u2BI"><input id="tab-D1AABJ0000" type="checkbox" name="card-tab" class="hidden CardBenefit_input__Af9J8"/><label for="tab-D1AABJ0000" class="CardBenefit_label__P_vq7"><img src="https://financial.pstatic.net/pie/common-bi/1.20.0/images/CD_HANA_TextPositive.png" alt="CD_HANA_TextPositive" width="56" height="18" loading="eager"/></label></li><li class="CardBenefit_item__6u2BI"><input id="tab-D1AAEV0000" type="checkbox" name="card-tab" class="hidden CardBenefit_input__Af9J8"/><label for="tab-D1AAEV0000" class="CardBenefit_label__P_vq7"><img src="https://financial.pstatic.net/pie/common-bi/1.20.0/images/CD_SAMSUNG_TextPositive.png" alt="CD_SAMSUNG_TextPositive" width="41" height="18" loading="eager"/></label></li><li class="CardBenefit_item__6u2BI"><input id="tab-D1AAAH0000" type="checkbox" name="card-tab" class="hidden CardBenefit_input__Af9J8"/><label for="tab-D1AAAH0000" class="CardBenefit_label__P_vq7"><img src="https://financial.pstatic.net/pie/common-bi/1.20.0/images/CD_WOORI_TextPositive.png" alt="CD_WOORI_TextPositive" width="52" height="18" loading="eager"/></label></li><li class="CardBenefit_item__6u2BI"><input id="tab-D1AAFQ0000" type="checkbox" name="card-tab" class="hidden CardBenefit_input__Af9J8"/><label for="tab-D1AAFQ0000" class="CardBenefit_label__P_vq7"><img src="https://financial.pstatic.net/pie/common-bi/1.20.0/images/CD_BC_TextPositive.png" alt="CD_BC_TextPositive" width="54" height="18" loading="eager"/></label></li><li class="CardBenefit_item__6u2BI"><input id="tab-D1AADO0000" type="checkbox" name="card-tab" class="hidden CardBenefit_input__Af9J8"/><label for="tab-D1AADO0000" class="CardBenefit_label__P_vq7"><img src="https://financial.pstatic.net/pie/common-bi/1.20.0/images/CD_LOTTE_TextPositive.png" alt="CD_LOTTE_TextPositive" width="43" height="18" loading="eager"/></label></li></ul></div></div><div class="CardBenefit_content__042yh"><ul class="CardBenefit_list-benefit__kl2vY"><li class="CardBenefit_item__6u2BI"><img src="https://financial.pstatic.net/pie/common-bi/1.20.0/images/IS_AXA_Profile.png" alt="IS_AXA_Profile" width="28" height="28" loading="eager"/><strong class="CardBenefit_name__heMlY">AXA손해</strong>주유권<b class="CardBenefit_value__7tsW6">최대 3만원</b></li><li class="CardBenefit_item__6u2BI"><img src="https://financial.pstatic.net/pie/common-bi/1.20.0/images/IS_DBFIRE_Profile.png" alt="IS_DBFIRE_Profile" width="28" height="28" loading="eager"/><strong class="CardBenefit_name__heMlY">DB손해</strong>주유권<b class="CardBenefit_value__7tsW6">최대 3만원</b></li><li class="CardBenefit_item__6u2BI"><img src="https://financial.pstatic.net/pie/common-bi/1.20.0/images/IS_KBFIRE_Profile.png" alt="IS_KBFIRE_Profile" width="28" height="28" loading="eager"/><strong class="CardBenefit_name__heMlY">KB손해</strong>주유권<b class="CardBenefit_value__7tsW6">최대 3만원</b></li><li class="CardBenefit_item__6u2BI"><img src="https://financial.pstatic.net/pie/common-bi/1.20.0/images/IS_MERITZFIRE_Profile.png" alt="IS_MERITZFIRE_Profile" width="28" height="28" loading="eager"/><strong class="CardBenefit_name__heMlY">메리츠화재</strong>캐시백<b class="CardBenefit_value__7tsW6">최대 3만원</b></li><li class="CardBenefit_item__6u2BI"><img src="https://financial.pstatic.net/pie/common-bi/1.20.0/images/IS_SAMSUNGFIRE_Profile.png" alt="IS_SAMSUNGFIRE_Profile" width="28" height="28" loading="eager"/><strong class="CardBenefit_name__heMlY">삼성화재</strong>주유권<b class="CardBenefit_value__7tsW6">최대 3만원</b></li><li class="CardBenefit_item__6u2BI"><img src="https://financial.pstatic.net/pie/common-bi/1.20.0/images/IS_CARROT_Profile.png" alt="IS_CARROT_Profile" width="28" height="28" loading="eager"/><strong class="CardBenefit_name__heMlY">캐롯손해</strong>주유권<b class="CardBenefit_value__7tsW6">최대 3만원</b></li><li class="CardBenefit_item__6u2BI"><img src="https://financial.pstatic.net/pie/common-bi/1.20.0/images/IS_HI_Profile.png" alt="IS_HI_Profile" width="28" height="28" loading="eager"/><strong class="CardBenefit_name__heMlY">현대해상</strong>주유권<b class="CardBenefit_value__7tsW6">최대 3만원</b></li><li class="CardBenefit_item__6u2BI"><img src="https://financial.pstatic.net/pie/common-bi/1.20.0/images/IS_HEUNGKUKFIRE_Profile.png" alt="IS_HEUNGKUKFIRE_Profile" width="28" height="28" loading="eager"/><strong class="CardBenefit_name__heMlY">흥국화재</strong>주유권<b class="CardBenefit_value__7tsW6">최대 3만원</b></li></ul><div class="CardBenefit_area-button__FQyev"><button type="button" class="ButtonBox-module_article__b5G1- ButtonBox-module_medium__fgPwa ButtonBox-module_secondary__Z6HBM ButtonBox-module_line__sIEzF ButtonBox-module_color-npayGreen__A2ds2 ButtonBox-module_type-wide__l6sGc" style="width:undefinedpx">혜택 포함 최저가 보기</button></div><button type="button" class="CardBenefit_link__TdjPi"><span class="blind">최저가 페이지 이동</span></button></div></div><div class="ContentWrapper_article__cSQqk CardRecommend_article__LRGnp"><h3 class="ContentWrapper_title__UAxYu"> 혜택에<br/> 주유·충전 할인도 받을 수 있어요<!-- --> </h3><div class="CardRecommend_banner__Dk9Fq"><div class="flicking-viewport flicking-hidden"><div class="flicking-camera"><button type="button" class="CardRecommend_item__r1Znd"><div class="CardRecommend_area-card__Ib_xg"><div class="CardRecommend_img-card__C2hZJ"><img src="https://fs.pstatic.net/contents/resource/payment-mkt/card_image/LT/0/1732796284154/디지로카 Auto.png" alt="롯데카드  혜택" width="38" height="60" class="CardRecommend_card__RNs73"/></div></div><div class="CardRecommend_area-text__qvJo_"><div class="CardRecommend_name__YG785">롯데카드  혜택</div><div class="CardRecommend_description__sjg8P"><span class="CardRecommend_icon-plus__mT2PB"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"></svg></span>리터당 최대 150원 할인에 13만원 혜택!</div></div></button><button type="button" class="CardRecommend_item__r1Znd"><div class="CardRecommend_area-card__Ib_xg"><div class="CardRecommend_img-card__C2hZJ"><img src="https://fs.pstatic.net/contents/resource/payment-mkt/card_image/SS/0/1724684008580/taptap DRIVE.png" alt="삼성카드  혜택" width="38" height="60" class="CardRecommend_card__RNs73"/></div></div><div class="CardRecommend_area-text__qvJo_"><div class="CardRecommend_name__YG785">삼성카드  혜택</div><div class="CardRecommend_description__sjg8P"><span class="CardRecommend_icon-plus__mT2PB"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"></svg></span>주유 리터당 최대 150원 할인! + 8만원 혜택</div></div></button><button type="button" class="CardRecommend_item__r1Znd"><div class="CardRecommend_area-card__Ib_xg"><div class="CardRecommend_img-card__C2hZJ"><img src="https://fs.pstatic.net/contents/resource/payment-mkt/card_image/SH/0/1703722696713/oil2.png" alt="신한카드  혜택" width="38" height="60" class="CardRecommend_card__RNs73"/></div></div><div class="CardRecommend_area-text__qvJo_"><div class="CardRecommend_name__YG785">신한카드  혜택</div><div class="CardRecommend_description__sjg8P"><span class="CardRecommend_icon-plus__mT2PB"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"></svg></span>직접 고른 주유소에서 10% 할인 + 최대 17만원 혜택</div></div></button><button type="button" class="CardRecommend_item__r1Znd"><div class="CardRecommend_area-card__Ib_xg"><div class="CardRecommend_img-card__C2hZJ"><img src="https://fs.pstatic.net/contents/resource/payment-mkt/card_image/LT/0/1732796284154/디지로카 Auto.png" alt="롯데카드  혜택" width="38" height="60" class="CardRecommend_card__RNs73"/></div></div><div class="CardRecommend_area-text__qvJo_"><div class="CardRecommend_name__YG785">롯데카드  혜택</div><div class="CardRecommend_description__sjg8P"><span class="CardRecommend_icon-plus__mT2PB"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"></svg></span>리터당 최대 150원 할인에 13만원 혜택!</div></div></button><button type="button" class="CardRecommend_item__r1Znd"><div class="CardRecommend_area-card__Ib_xg"><div class="CardRecommend_img-card__C2hZJ"><img src="https://fs.pstatic.net/contents/resource/payment-mkt/card_image/SS/0/1724684008580/taptap DRIVE.png" alt="삼성카드  혜택" width="38" height="60" class="CardRecommend_card__RNs73"/></div></div><div class="CardRecommend_area-text__qvJo_"><div class="CardRecommend_name__YG785">삼성카드  혜택</div><div class="CardRecommend_description__sjg8P"><span class="CardRecommend_icon-plus__mT2PB"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"></svg></span>주유 리터당 최대 150원 할인! + 8만원 혜택</div></div></button><button type="button" class="CardRecommend_item__r1Znd"><div class="CardRecommend_area-card__Ib_xg"><div class="CardRecommend_img-card__C2hZJ"><img src="https://fs.pstatic.net/contents/resource/payment-mkt/card_image/SH/0/1703722696713/oil2.png" alt="신한카드  혜택" width="38" height="60" class="CardRecommend_card__RNs73"/></div></div><div class="CardRecommend_area-text__qvJo_"><div class="CardRecommend_name__YG785">신한카드  혜택</div><div class="CardRecommend_description__sjg8P"><span class="CardRecommend_icon-plus__mT2PB"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"></svg></span>직접 고른 주유소에서 10% 할인 + 최대 17만원 혜택</div></div></button></div></div><button type="button" class="CardRecommend_button-arrow__gHdi3 CardRecommend_prev__ZmIUU"><svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="CardRecommend_icon-arrow__KrczR"><path d="M1 1L6 6.01317L1 11" stroke="#c8cacc" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="blind">이전</span></button><button type="button" class="CardRecommend_button-arrow__gHdi3 CardRecommend_next__1sPJ4"><svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L6 6.01317L1 11" stroke="#c8cacc" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="blind">다음</span></button></div><div class="CardRecommend_area-button__O_OZB"><button type="button" class="ButtonBox-module_article__b5G1- ButtonBox-module_medium__fgPwa ButtonBox-module_secondary__Z6HBM ButtonBox-module_line__sIEzF ButtonBox-module_color-npayGreen__A2ds2 ButtonBox-module_type-wide__l6sGc" style="width:undefinedpx">주유 혜택 카드 더보기</button></div></div><div class="ContentWrapper_article__cSQqk OtherInsuranceIntroNavigation_article__6U_zZ"><h3 class="ContentWrapper_title__UAxYu">다른 비교도 해보세요</h3><ul><li class="OtherInsuranceIntroNavigation_item__CRpIN"><a class="OtherInsuranceIntroNavigation_link___vJ0d" data-au-service="platform" data-au-page="finance-insu" data-au="intro.travel" href="/travel?inflow=car_intro"><span class="OtherInsuranceIntroNavigation_icon__L1N55"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_7696_37846)"><mask id="path-5-inside-1_7696_37846" fill="white"></g><defs><clipPath id="clip0_7696_37846"><rect width="28" height="28" fill="white"></rect></clipPath></defs></svg></span><div><b class="OtherInsuranceIntroNavigation_name__vLaHv">해외여행 비교</b><span class="OtherInsuranceIntroNavigation_sub__UA9lj">10초만에 최저가  찾기</span></div><svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="OtherInsuranceIntroNavigation_icon-arrow__3p2YF"><path d="M1 1L5 5.01054L1 9" stroke="#1e1e23" stroke-linecap="round" stroke-linejoin="round"></path></svg></a></li><li class="OtherInsuranceIntroNavigation_item__CRpIN"><a class="OtherInsuranceIntroNavigation_link___vJ0d" data-au-service="platform" data-au-page="finance-insu" data-au="intro.saving" href="/savings?inflow=car_intro"><span class="OtherInsuranceIntroNavigation_icon__L1N55"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"></svg></span><div><b class="OtherInsuranceIntroNavigation_name__vLaHv">저축 비교</b><span class="OtherInsuranceIntroNavigation_sub__UA9lj">내 돈 최대로 불려주는  찾기</span></div><svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="OtherInsuranceIntroNavigation_icon-arrow__3p2YF"><path d="M1 1L5 5.01054L1 9" stroke="#1e1e23" stroke-linecap="round" stroke-linejoin="round"></path></svg></a></li><li class="OtherInsuranceIntroNavigation_item__CRpIN"><a class="OtherInsuranceIntroNavigation_link___vJ0d" data-au-service="platform" data-au-page="finance-insu" data-au="intro.pet" href="/pet?inflow=car_intro"><span class="OtherInsuranceIntroNavigation_icon__L1N55"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><mask id="path-1-inside-1_7696_38430" fill="white"></svg></span><div><b class="OtherInsuranceIntroNavigation_name__vLaHv">펫 비교</b><span class="OtherInsuranceIntroNavigation_sub__UA9lj">우리집 반려동물을 위한  찾기</span></div><svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="OtherInsuranceIntroNavigation_icon-arrow__3p2YF"><path d="M1 1L5 5.01054L1 9" stroke="#1e1e23" stroke-linecap="round" stroke-linejoin="round"></path></svg></a></li></ul></div><div class="Notice_article__lCsqJ"><h3 class="Notice_title__ThU4U">유의사항</h3><ul class="DotList_article__HM8Qt Notice_dot-list__sCNjB"><li class="DotList_item__6ieo7">본 서비스에서는 기본 와 함께 제휴 회사에서 제공하는 할인 혜택 등을 반영한 를 제공하고 있습니다.</li><li class="DotList_item__6ieo7">카드 청구할인 및 캐시백은 제휴 회사에서 안내하는 조건(예: 타 이벤트 중복 적용 불가 등)에 따라 적용되고, 조건 미충족 시 할인이 적용되지 않거나 할인액이 일부 조정될 수 있습니다. 사의 홈페이지에서 카드결제 전 조건 및 최종 결제금액을 반드시 확인하여 주시기 바랍니다.</li><li class="DotList_item__6ieo7">비교추천대상 상품은 모든 금융회사의 상품이 아닌 제휴 금융회사의 상품 입니다.</li><li class="DotList_item__6ieo7">네이버파이낸셜은 금융위원회로부터 혁신금융서비스 사업자로 지정 받아 상품 비교추천 서비스를 제공합니다.</li><li class="DotList_item__6ieo7">네이버파이낸셜은 다수의 회사와 모집업무 위탁 계약을 체결하였습니다.</li><li class="DotList_item__6ieo7">제휴 회사 : 롯데손해, 메리츠화재, 삼성화재, 캐롯손해, 하나손해, 현대해상, 흥국화재, AXA손해, DB손해, KB손해<br/>상품의 계약 주체는 제휴 회사이며, 상품 가입은 해당 회사에서 진행됩니다. 네이버파이낸셜은 계약 체결에 대한 권한을 갖지 않습니다.</li><li class="DotList_item__6ieo7">네이버페이 비교서비스를 통해 가입하는 경우와 회사 홈페이지를 통해 가입할 경우의 에 차이가 발생할 수 있습니다.</li><li class="DotList_item__6ieo7">본 서비스와 관련하여 금융소비자는 금융소비자보호법 제44조 및 제45조에 따라 금융상품직접판매업자인 제휴 회사 및 비교추천서비스 혁신금융사업자인 네이버파이낸셜㈜에 손해배상을 청구할 수 있습니다.</li><li class="DotList_item__6ieo7">네이버파이낸셜은 상품 비교추천 서비스를 통한 계약 체결과 관련하여 금융소비자로부터 어떠한 금전적 대가도 받지 않습니다.</li><li class="DotList_item__6ieo7">네이버파이낸셜은 상품 비교추천 서비스 운영과 관련하여 개인정보보호법 및 신용정보보호법을 준수하며,  계약과 관련하여 고객이 제공한 신용정보 또는 개인정보 등은 금융상품직접판매업자인 회사가 보유·관리합니다.</li><li class="DotList_item__6ieo7">금융소비자는 금융소비자보호법 제19조 제1항에 따라 금융회사로부터 충분한 설명을 받을 권리가 있으며, 상품에 관한 계약을 체결하기 전에 상품설명서 및 약관을 읽어보시기 바랍니다.</li><li class="DotList_item__6ieo7">기존에 체결한 계약을 해지하고 다른 계약을 체결하는 경우, 가 인상되거나 보장내용이 변경될 수 있으며, 회사로부터 계약체결이 거절될 수 있습니다.</li><li class="DotList_item__6ieo7">캐롯손해은 다른 사의 자동차 산출 기준과 달리 매월 실제 주행한 거리에 따라 산출되므로, 예상 주행거리로 산출한 와 실제 가 달라질 수 있습니다.</li><li class="DotList_item__6ieo7">네이버파이낸셜이 제공하는 상품 비교추천서비스와 관련하여 문의사항이 있으시면 네이버파이낸셜 고객센터로 알려주세요. (<a class="LineAnchor_article___C9u7 LineAnchor_type-blue__sq1tU" href="https://help.pay.naver.com/mail/form.help">네이버파이낸셜 고객센터&gt;온라인 문의하기 바로 가기</a>)</li><li class="DotList_item__6ieo7">상품 수수 관련 자세한사항은<!-- --> <a class="LineAnchor_article___C9u7 LineAnchor_type-blue__sq1tU" href="https://www.naverfincorp.com/notice/noticeView?articleId=31482">공지사항</a>을 확인해주세요.</li><li class="DotList_item__6ieo7">예금자 보호 안내 : 이 계약은 예금자보호법에 따라 예금공사가 보호하되, 보호 한도는 제휴사에 있는 귀하의 모든 예금보호 대상 금융상품의 해약환급금(또는 만기 시 금이나 사고금)에 기타지급금을 합하여 1인당 “최고 5천만원”이며, 5천만원을 초과하는 나머지 금액은 보호하지 않습니다.</li></ul><div class="Notice_area-etc__wgYCZ"><em class="Notice_emphasis__p_m44">네이버파이낸셜 심의필 2024-I-00011</em><a href="https://new-m.pay.naver.com/member/viewer/pdf?file=car-insu" class="Notice_link-terms__RK7_A">상품 모집서비스 이용약관<svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="Notice_icon__RI8dd"><path d="M1 1L5 5.01054L1 9" stroke="#767678" stroke-linecap="round" stroke-linejoin="round"></path></svg></a></div></div></div></div><div class="FlexibleLayout-module_row__P4p6X"><div class="InsuranceFooter_article__npQmo InsuranceFooter_type-floating__7psli"><div class="Footer-module_article__P38DG Footer-module_type-gray150__6VPmE Footer-module_width-type-basic__5ibFl Footer-module_is-bottom-margin__ZtHqT"><div class="Footer-module_inner__J3glp"><ul class="FooterQuickMenu-module_article__UX9-p"><li class="FooterQuickMenu-module_item__UTOXd"><a href="#" class="FooterQuickMenu-module_link__t0NIA" target="_self">로그인</a></li><li class="FooterQuickMenu-module_item__UTOXd"><a href="https://www.naver.com/more.html" class="FooterQuickMenu-module_link__t0NIA" target="_self">전체서비스</a></li></ul><div class="FooterInfo-module_article__NFe97 FooterInfo-module_type-gray700__CWZ1x"><a href="https://www.naverfincorp.com/main" class="FooterInfo-module_link__oCxwK" target="_self"><svg width="96" height="26" viewBox="0 0 96 26" fill="none" xmlns="http://www.w3.org/2000/svg"></svg><span class="blind">Naver Financial</span></a><div class="FooterInfo-module_area-fold__-VV5Q"><button type="button" class="FooterInfo-module_button__MRyzl">네이버파이낸셜㈜ 사업자 정보<span class="FooterInfo-module_icon__pyqRF"><svg width="8" height="4" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L5 5L9 1" stroke="#767678" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="blind">펼치기</span></span></button></div></div></div></div></div></div></div></div><script id="__NEXT_DATA__" type="application/json" crossorigin="anonymous">{"props":{"pageProps":{"userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36","dehydratedState":{"mutations":[],"queries":[{"state":{"data":{"isSuccess":true,"result":{"inventories":[{"contents":[{"contentTemplateId":"content_banner_car_insurance","group":"","contentService":"","metaData":[{"elementId":"title","elementType":"text","values":[{"key":"text","value":"3월 자동차 카드 혜택"}]},{"elementId":"cardList","elementType":"list","values":[{"key":"list","value":["D1AAFO0000","D1AAEX0000","D1AAAF0000","D1AABG0000","D1AABJ0000","D1AAEV0000","D1AAAH0000","D1AAFQ0000","D1AADO0000"]}]},{"elementId":"disccountedInsuranceList","elementType":"json","values":[{"key":"json","value":{"D1AAEV0000":[{"orgCode":"B1AAJM0000","name":"KB손해","discountType":"청구할인","discountAmount":"최대 3만원"},{"orgCode":"B2AACL0000","name":"AXA손해","discountType":"청구할인","discountAmount":"최대 3만원"},{"orgCode":"B2AAIF0000","name":"캐롯손해","discountType":"청구할인","discountAmount":"최대 3만원"},{"orgCode":"B2AAEW0000","name":"삼성화재","discountType":"캐시백","discountAmount":"최대 3만원"}],"D1AAAF0000":[{"orgCode":"B1AAJM0000","name":"KB손해","discountType":"청구할인","discountAmount":"최대 3만원"},{"orgCode":"B2AACL0000","name":"AXA손해","discountType":"청구할인","discountAmount":"최대 3만원"}]}}]},{"elementId":"buttonLandingUrl","elementType":"link","values":[{"key":"url","value":"https://tr.pay.naver.com/trace/content/r/finance-home/insurance/card/kuto-ubaf-pkph-zrvn?bindingArea=false\u0026bindingContentService=false\u0026contentService=\u0026url=https%3A%2F%2Finsurance.pay.naver.com%2Fcar%3Finflow%3Dfin_home_card\u0026element=buttonLandingUrl"},{"key":"nclick","value":"contents.inscard"},{"key":"useRedirect","value":"true"},{"key":"contentService","value":"true"},{"key":"area","value":"true"}]},{"elementId":"buttonText","elementType":"text","values":[{"key":"text","value":"혜택 포함 최저가  찾기"}]},{"elementId":"discountedInsuranceList","elementType":"json","values":[{"key":"json","value":{"D1AAEV0000":[{"orgCode":"B1AAJM0000","name":"KB손해","discountType":"청구할인","discountAmount":"최대 3만원"},{"orgCode":"B2AACL0000","name":"AXA손해","discountType":"청구할인","discountAmount":"최대 3만원"},{"orgCode":"B2AAIF0000","name":"캐롯손해","discountType":"청구할인","discountAmount":"최대 3만원"},{"orgCode":"B2AAEW0000","name":"삼성화재","discountType":"캐시백","discountAmount":"최대 3만원"}],"D1AAAF0000":[{"orgCode":"B1AAJM0000","name":"KB손해","discountType":"청구할인","discountAmount":"최대 3만원"},{"orgCode":"B2AACL0000","name":"AXA손해","discountType":"청구할인","discountAmount":"최대 3만원"}]}}]},{"elementId":"discountedInsuranceInfo","elementType":"json","values":[{"key":"json","value":{"D1AADO0000":[{"orgCode":"B2AACR0000","name":"메리츠화재","discountType":"캐시백","discountAmount":"최대 3만원"},{"orgCode":"B2AAEW0000","name":"삼성화재","discountType":"주유권","discountAmount":"최대 3만원"}],"D1AAAH0000":[{"orgCode":"B2AAEN0000","name":"DB손해","discountType":"캐시백","discountAmount":"최대 3만원"},{"orgCode":"B2AALR0000","name":"KB손해","discountType":"캐시백","discountAmount":"최대 3만원"},{"orgCode":"B2AACR0000","name":"메리츠화재","discountType":"캐시백","discountAmount":"최대 3만원"},{"orgCode":"B2AAEW0000","name":"삼성화재","discountType":"주유권","discountAmount":"최대 3만원"},{"orgCode":"B2AAIF0000","name":"캐롯손해","discountType":"캐시백","discountAmount":"최대 3만원"},{"orgCode":"B2AAAL0000","name":"현대해상","discountType":"캐시백","discountAmount":"최대 3만원"}],"D1AAAF0000":[{"orgCode":"B2AACL0000","name":"AXA손해","discountType":"주유권","discountAmount":"최대 3만원"},{"orgCode":"B2AAEN0000","name":"DB손해","discountType":"주유권","discountAmount":"최대 3만원"},{"orgCode":"B2AALR0000","name":"KB손해","discountType":"주유권","discountAmount":"최대 3만원"},{"orgCode":"B2AACR0000","name":"메리츠화재","discountType":"주유권","discountAmount":"최대 3만원"},{"orgCode":"B2AAEW0000","name":"삼성화재","discountType":"주유권","discountAmount":"최대 3만원"},{"orgCode":"B2AABT0000","name":"하나손해","discountType":"캐시백","discountAmount":"최대 3만원"},{"orgCode":"B2AAAL0000","name":"현대해상","discountType":"주유권","discountAmount":"최대 3만원"},{"orgCode":"B2AANY0000","name":"흥국화재","discountType":"주유권","discountAmount":"최대 3만원"}],"D1AAFQ0000":[{"orgCode":"B2AAEN0000","name":"DB손해","discountType":"청구할인","discountAmount":"최대 3만원"},{"orgCode":"B2AALR0000","name":"KB손해","discountType":"청구할인","discountAmount":"최대 3만원"},{"orgCode":"B2AAEW0000","name":"삼성화재","discountType":"주유권","discountAmount":"최대 3만원"},{"orgCode":"B2AAIF0000","name":"캐롯손해","discountType":"청구할인","discountAmount":"최대 3만원"},{"orgCode":"B2AANY0000","name":"흥국화재","discountType":"청구할인","discountAmount":"최대 3만원"}],"D1AABJ0000":[{"orgCode":"B2AACL0000","name":"AXA손해","discountType":"캐시백","discountAmount":"최대 3만원"},{"orgCode":"B2AAEN0000","name":"DB손해","discountType":"캐시백","discountAmount":"최대 3만원"},{"orgCode":"B2AALR0000","name":"KB손해","discountType":"캐시백","discountAmount":"최대 3만원"},{"orgCode":"B2AAEW0000","name":"삼성화재","discountType":"주유권","discountAmount":"최대 3만원"},{"orgCode":"B2AABT0000","name":"하나손해","discountType":"캐시백","discountAmount":"최대 3만원"},{"orgCode":"B2AAAL0000","name":"현대해상","discountType":"캐시백","discountAmount":"최대 3만원"},{"orgCode":"B2AANY0000","name":"흥국화재","discountType":"캐시백","discountAmount":"최대 3만원"}],"D1AAEX0000":[{"orgCode":"B2AACL0000","name":"AXA손해","discountType":"주유권","discountAmount":"최대 3만원"},{"orgCode":"B2AAEN0000","name":"DB손해","discountType":"캐시백","discountAmount":"최대 3만원"},{"orgCode":"B2AALR0000","name":"KB손해","discountType":"주유권","discountAmount":"최대 3만원"},{"orgCode":"B2AACR0000","name":"메리츠화재","discountType":"캐시백","discountAmount":"최대 3만원"},{"orgCode":"B2AAEW0000","name":"삼성화재","discountType":"주유권","discountAmount":"최대 3만원"},{"orgCode":"B2AAIF0000","name":"캐롯손해","discountType":"캐시백","discountAmount":"최대 3만원"},{"orgCode":"B2AABT0000","name":"하나손해","discountType":"캐시백","discountAmount":"최대 3만원"},{"orgCode":"B2AAAL0000","name":"현대해상","discountType":"주유권","discountAmount":"최대 3만원"}],"D1AAFO0000":[{"orgCode":"B2AACL0000","name":"AXA손해","discountType":"주유권","discountAmount":"최대 3만원"},{"orgCode":"B2AAEN0000","name":"DB손해","discountType":"주유권","discountAmount":"최대 3만원"},{"orgCode":"B2AALR0000","name":"KB손해","discountType":"주유권","discountAmount":"최대 3만원"},{"orgCode":"B2AACR0000","name":"메리츠화재","discountType":"캐시백","discountAmount":"최대 3만원"},{"orgCode":"B2AAEW0000","name":"삼성화재","discountType":"주유권","discountAmount":"최대 3만원"},{"orgCode":"B2AAIF0000","name":"캐롯손해","discountType":"주유권","discountAmount":"최대 3만원"},{"orgCode":"B2AAAL0000","name":"현대해상","discountType":"주유권","discountAmount":"최대 3만원"},{"orgCode":"B2AANY0000","name":"흥국화재","discountType":"주유권","discountAmount":"최대 3만원"}],"D1AAEV0000":[{"orgCode":"B2AACL0000","name":"AXA손해","discountType":"주유권","discountAmount":"최대 3만원"},{"orgCode":"B2AAEN0000","name":"DB손해","discountType":"주유권","discountAmount":"최대 3만원"},{"orgCode":"B2AALR0000","name":"KB손해","discountType":"주유권","discountAmount":"최대 3만원"},{"orgCode":"B2AACR0000","name":"메리츠화재","discountType":"주유권","discountAmount":"최대 3만원"},{"orgCode":"B2AAEW0000","name":"삼성화재","discountType":"캐시백","discountAmount":"최대 3만원"},{"orgCode":"B2AAAL0000","name":"현대해상","discountType":"주유권","discountAmount":"최대 3만원"}],"D1AABG0000":[{"orgCode":"B2AAEN0000","name":"DB손해","discountType":"캐시백","discountAmount":"최대 3만원"},{"orgCode":"B2AALR0000","name":"KB손해","discountType":"캐시백","discountAmount":"최대 3만원"},{"orgCode":"B2AACR0000","name":"메리츠화재","discountType":"캐시백","discountAmount":"최대 3만원"},{"orgCode":"B2AAEW0000","name":"삼성화재","discountType":"주유권","discountAmount":"최대 3만원"},{"orgCode":"B2AAIF0000","name":"캐롯손해","discountType":"캐시백","discountAmount":"최대 3만원"},{"orgCode":"B2AABT0000","name":"하나손해","discountType":"캐시백","discountAmount":"최대 3만원"},{"orgCode":"B2AAAL0000","name":"현대해상","discountType":"캐시백","discountAmount":"최대 3만원"}]}}]},{"elementId":"discountedInsuranceInfoLink","elementType":"linkOptional","values":[{"key":"url","value":"https://tr.pay.naver.com/trace/content/r/finance-home/insurance/card/kuto-ubaf-pkph-zrvn?bindingArea=false\u0026bindingContentService=false\u0026contentService=\u0026url=https%3A%2F%2Finsurance.pay.naver.com%2Fcar%3Finflow%3Dfin_home_card\u0026element=discountedInsuranceInfoLink"},{"key":"nclick","value":"contents.inscardc"},{"key":"area","value":"true"},{"key":"contentService","value":"true"},{"key":"useRedirect","value":"true"}]}],"validatorMetaData":{},"loaderMetaData":{},"id":"kuto-ubaf-pkph-zrvn","status":true}],"area":{"service":"finance-home","page":"insurance","area":"card","alias":"card","contentTemplateIds":["content_banner_car_insurance"],"contentTemplateVersion":1,"slotCount":1,"slotType":"","orderType":"JAVIS_MULTI","width":0,"height":0,"metaData":{},"selectedPlugin":[],"areaService":"","maxWidth":0,"maxHeight":0,"maxDynamicContents":1,"pageOrder":0,"id":"finance-home|insurance|card"},"contentTemplates":[{"id":"content_banner_car_insurance","metaData":[{"elementId":"title","elementType":"text","values":[]},{"elementId":"cardList","elementType":"list","values":[]},{"elementId":"buttonLandingUrl","elementType":"link","values":[]},{"elementId":"buttonText","elementType":"text","values":[]},{"elementId":"discountedInsuranceInfo","elementType":"json","values":[]},{"elementId":"discountedInsuranceInfoLink","elementType":"linkOptional","values":[]}]}]}],"page":{"title":" 페이지"}}},"dataUpdateCount":1,"dataUpdatedAt":1741069353664,"error":null,"errorUpdateCount":0,"errorUpdatedAt":0,"fetchFailureCount":0,"fetchFailureReason":null,"fetchMeta":null,"isInvalidated":false,"status":"success","fetchStatus":"idle"},"queryKey":[{"url":"/fuc/page","params":{"service":"finance-home","page":"insurance"}}],"queryHash":"[{\"params\":{\"page\":\"insurance\",\"service\":\"finance-home\"},\"url\":\"/fuc/page\"}]"},{"state":{"data":{"isSuccess":true,"result":{"inventories":[{"contents":[{"contentTemplateId":"insu_mass_car_card","group":"","contentService":"","metaData":[{"elementId":"contents","elementType":"json","values":[{"key":"json","value":[{"image_url":"https://fs.pstatic.net/contents/resource/payment-mkt/card_image/LT/0/1732796284154/디지로카 Auto.png","main_text":"롯데카드  혜택","benefit":"리터당 최대 150원 할인에 13만원 혜택!","href":"https://new-m.pay.naver.com/affiliate-card/promotion?cardCompanyId=CCLO\u0026cardIssuerCode=CCLO\u0026promotionId=20250217000000009570\u0026from=insu"},{"image_url":"https://fs.pstatic.net/contents/resource/payment-mkt/card_image/SS/0/1724684008580/taptap DRIVE.png","main_text":"삼성카드  혜택","benefit":"주유 리터당 최대 150원 할인! + 8만원 혜택","href":"https://new-m.pay.naver.com/affiliate-card/promotion?cardCompanyId=CCSS\u0026cardIssuerCode=CCSS\u0026promotionId=20250221000000009617\u0026from=insu"},{"image_url":"https://fs.pstatic.net/contents/resource/payment-mkt/card_image/SH/0/1703722696713/oil2.png","main_text":"신한카드  혜택","benefit":"직접 고른 주유소에서 10% 할인 + 최대 17만원 혜택","href":"https://new-m.pay.naver.com/affiliate-card/promotion?cardCompanyId=CCLG\u0026cardIssuerCode=CCLG\u0026promotionId=20250220000000009605\u0026from=insu"}]}]},{"elementId":"moreUrl","elementType":"link","values":[{"key":"url"},{"key":"nclick"}]}],"validatorMetaData":{},"loaderMetaData":{},"id":"5ous-9zot-iems-cwut","status":true}],"area":{"service":"card-payment","page":"insu_car_mass","area":"insu_car_mass","alias":"insu_car_mass","contentTemplateIds":["insu_mass_car_card"],"contentTemplateVersion":1,"slotCount":1,"slotType":"","orderType":"WEIGHT","width":0,"height":0,"metaData":{},"selectedPlugin":[],"areaService":"","maxWidth":0,"maxHeight":0,"maxDynamicContents":1,"pageOrder":2147483647,"id":"card-payment|insu_car_mass|insu_car_mass"},"contentTemplates":[{"id":"insu_mass_car_card","metaData":[{"elementId":"contents","elementType":"json","values":[]},{"elementId":"moreUrl","elementType":"link","values":[]}]}]}],"page":{"title":"자동차 매스마케팅"}}},"dataUpdateCount":1,"dataUpdatedAt":1741069353665,"error":null,"errorUpdateCount":0,"errorUpdatedAt":0,"fetchFailureCount":0,"fetchFailureReason":null,"fetchMeta":null,"isInvalidated":false,"status":"success","fetchStatus":"idle"},"queryKey":[{"url":"/fuc/page","params":{"service":"card-payment","page":"insu_car_mass"}}],"queryHash":"[{\"params\":{\"page\":\"insu_car_mass\",\"service\":\"card-payment\"},\"url\":\"/fuc/page\"}]"},{"state":{"data":{"isSuccess":true,"result":{"currentISOString":"2025-03-04T06:22:33.667Z"}},"dataUpdateCount":1,"dataUpdatedAt":1741069353668,"error":null,"errorUpdateCount":0,"errorUpdatedAt":0,"fetchFailureCount":0,"fetchFailureReason":null,"fetchMeta":null,"isInvalidated":false,"status":"success","fetchStatus":"idle"},"queryKey":[{"url":"/time"}],"queryHash":"[{\"url\":\"/time\"}]"},{"state":{"data":{"isSuccess":true,"result":[{"partnerId":"dxx5smacl5y6","partnerCode":"N895","partnerName":"캐롯손해","partnerProductId":"1006","partnerProductName":"개인용자동차(월정산형)","deliberationNumber":"2024-01-02"},{"partnerId":"nthb5zglfrkw","partnerCode":"443","partnerName":"DB손해","partnerProductId":"1002","partnerProductName":"프로미카 다이렉트개인용자동차(플랫폼)","deliberationNumber":"2024-01-01"},{"partnerId":"o1qfkqlt29mi","partnerCode":"445","partnerName":"롯데손해","partnerProductId":"1007","partnerProductName":"let:click 개인용자동차(인터넷)","deliberationNumber":"2024-01-03"},{"partnerId":"afpabdjlroco","partnerCode":"448","partnerName":"메리츠화재","partnerProductId":"1004","partnerProductName":"메리츠화재 다이렉트 자동차(CM)","deliberationNumber":"2024-01-04"},{"partnerId":"eginljcbjtrp","partnerCode":"442","partnerName":"현대해상","partnerProductId":"1003","partnerProductName":"Hicar 다이렉트 개인용자동차(플랫폼)","deliberationNumber":"2024-01-07"},{"partnerId":"fnzipmj2hss3","partnerCode":"403","partnerName":"흥국화재","partnerProductId":"1009","partnerProductName":"이유인터넷개인용자동차","deliberationNumber":"2024-01-08"},{"partnerId":"6dp23vefgecl","partnerCode":"441","partnerName":"삼성화재","partnerProductId":"1000","partnerProductName":"개인용애니카다이렉트자동차(플랫폼)","deliberationNumber":"2024-01-05"},{"partnerId":"o7y85m3cp3uk","partnerCode":"444","partnerName":"KB손해","partnerProductId":"1001","partnerProductName":"KB다이렉트(플랫폼)개인용자동차","deliberationNumber":"2024-01-10"},{"partnerId":"kufni13uatik","partnerCode":"447","partnerName":"AXA손해","partnerProductId":"1008","partnerProductName":"다이렉트 자동차","deliberationNumber":"2024-01-09"},{"partnerId":"s9twe63sgdug","partnerCode":"N898","partnerName":"하나손해","partnerProductId":"1005","partnerProductName":"하나 다이렉트 자동차","deliberationNumber":"2024-01-06"}],"message":""},"dataUpdateCount":1,"dataUpdatedAt":1741069353680,"error":null,"errorUpdateCount":0,"errorUpdatedAt":0,"fetchFailureCount":0,"fetchFailureReason":null,"fetchMeta":null,"isInvalidated":false,"status":"success","fetchStatus":"idle"},"queryKey":[{"url":"/car/productPartners","method":"GET"}],"queryHash":"[{\"method\":\"GET\",\"url\":\"/car/productPartners\"}]"},{"state":{"data":{"isSuccess":true,"detailCode":null,"message":null,"result":{"serviceType":"CAR_INS","activated":true,"isInspection":false,"noticeDetails":null}},"dataUpdateCount":1,"dataUpdatedAt":1741069353688,"error":null,"errorUpdateCount":0,"errorUpdatedAt":0,"fetchFailureCount":0,"fetchFailureReason":null,"fetchMeta":null,"isInvalidated":false,"status":"success","fetchStatus":"idle"},"queryKey":[{"url":"/management/noticeControl","params":{"serviceType":"CAR_INS"}}],"queryHash":"[{\"params\":{\"serviceType\":\"CAR_INS\"},\"url\":\"/management/noticeControl\"}]"},{"state":{"data":{"isSuccess":true,"result":{"status":false,"age":null}},"dataUpdateCount":1,"dataUpdatedAt":1741069353691,"error":null,"errorUpdateCount":0,"errorUpdatedAt":0,"fetchFailureCount":0,"fetchFailureReason":null,"fetchMeta":null,"isInvalidated":false,"status":"success","fetchStatus":"idle"},"queryKey":[{"url":"/loginStatus","method":"get"}],"queryHash":"[{\"method\":\"get\",\"url\":\"/loginStatus\"}]"},{"state":{"data":{"isSuccess":true,"result":{"code":"90","status":false,"data":null}},"dataUpdateCount":1,"dataUpdatedAt":1741069353691,"error":null,"errorUpdateCount":0,"errorUpdatedAt":0,"fetchFailureCount":0,"fetchFailureReason":null,"fetchMeta":null,"isInvalidated":false,"status":"success","fetchStatus":"idle"},"queryKey":[{"url":"/payMemberStatus","method":"get"}],"queryHash":"[{\"method\":\"get\",\"url\":\"/payMemberStatus\"}]"}]}},"__N_SSP":true},"page":"/car","query":{"inflow":"search"},"buildId":"qee9MRHtCSk3RlcWDwLgK","assetPrefix":"https://financial.pstatic.net/insurance","isFallback":false,"isExperimentalCompile":false,"gssp":true,"appGip":true,"scriptLoader":[]}</script></body></html>
+
+
 
   
-
-  
-
